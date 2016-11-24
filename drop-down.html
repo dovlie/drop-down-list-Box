@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>pull-down menus</title>
+<style>
+*{padding:0;margin:0;}
+.pull-down-menus_box{position:absolute;border:1px solid #e3e3e5;height:26px;width:175px;background-color:#fff;}
+.boxtext{position:absolute;outline:none;height:26px;width:160px;left:10px;border:none;color:#666;background-color:inherit;}
+.downmenus{position:absolute;top:5px;left:150px;height:16px;width:16px;font-size:10px;text-align:center;color:#fff;background:#bd4d49;}
+.downmenus:hover{cursor:copy;background-color:#C30;}
+.pull-down-menus{position:absolute;left:-1px;border:1px solid #e3e3e5;top:25px;list-style:none;line-height:26px;}
+.pull-down-menus li{line-height:inherit;height:26px;width:175px;background:#e3e3e5;}
+.pull-down-menus .options{position:absolute;text-align:left;padding-left:30px;height:26px;width:175px;line-height:inherit;border:none;color:#666;background-color:inherit;}
+.pull-down-menus{display:none;}
+.pull-down-menus li .options:hover{background-color:#bd4d49;color:#fff;}
+<!--.pull-down-menus_box2{left:300px;}-->
+.pull-down-menus_box1{top:50%;left:50%;}<!--第一个下拉菜单位置，使用伪类名表示-->
+
+</style>
+
+<script>
+var mousecount1=0;
+var mousecount2=0;
+function lidown1(obj){
+	mousecount1+=1;
+	var x=obj.parentNode;//获取当前span标签的父节点，也就是div
+	var y=x.getElementsByTagName('ul')[0];//获取div里的第一个标签名为ul的标签
+	judge1(mousecount1,y);
+}
+function judge1(mousecount1,y){
+if(mousecount1%2==1){//判断当前ul是展开还是隐藏
+	y.style.display="block";//将这个ul的可见性设为block
+	}
+	else{y.style.display="none";}
+	}
+function chio1(obj){
+	var t=document.getElementById("boxtext1");
+	var v=obj.value;	
+	v=v.replace("?","");	
+	t.value=v;
+	var x=obj.parentNode;
+	var y=x.parentNode;
+	y.style.display="none";
+	mousecount1=0;
+	}	
+
+	
+//第二个下拉菜单调用函数	
+/*function lidown2(obj){
+	mousecount2+=1;
+	var x=obj.parentNode;//获取当前span标签的父节点，也就是div
+	var y=x.getElementsByTagName('ul')[0];//获取div里的第一个标签名为ul的标签
+	judge2(mousecount2,y);	
+}
+function judge2(mousecount2,y){
+if(mousecount2%2==1){//判断当前ul是展开还是隐藏
+	y.style.display="block";//将这个ul的可见性设为block
+	}
+	else{y.style.display="none";}
+	}
+
+function chio2(obj){
+	var t=document.getElementById("boxtext2");//数字要改
+	var v=obj.value;	
+	v=v.replace("?","");	
+	t.value=v;
+	var x=obj.parentNode;
+	var y=x.parentNode;
+	y.style.display="none";
+	mousecount2=0;;//数字要改	
+	}
+*/
+function Ohover(obj){
+	obj.value="?"+obj.value;
+	obj.style.paddingLeft="20px";<!--这个数看着你的（对勾）符号大小改-->	
+	}
+function Ole(obj){
+	var x=obj.value;	
+	x=x.replace("?","");	
+	obj.value=x;
+	obj.style.paddingLeft="30px";<!--鼠标离开后距离改回来-->
+	}
+</script>
+</head>
+
+<body>
+<div class="pull-down-menus_box pull-down-menus_box1" id="pull-down-menus_box">
+<input type="text" readonly value="提示内容1" class="boxtext" id="boxtext1"/><!--readonly文本框只读不可输入-->
+<span class="downmenus downmenus1" onClick="lidown1(this)">∨</span><!--点击该标签则将当前标签作为参数传入lidown函数-->
+	
+	<ul class="pull-down-menus pull-down-menus1">
+    	
+        	 <li><input class="options" type="button" value="中国" onclick="chio1(this)" onmouseover="Ohover(this)" onmouseOut="Ole(this)" /></li>
+
+      	     <li><input class="options" type="button" value="美国" onclick="chio1(this) "onmouseover="Ohover(this)" onmouseOut="Ole(this)" /></li>
+
+      	     <li><input class="options" type="button" value="英国" onclick="chio1(this)" onmouseover="Ohover(this)" onmouseOut="Ole(this)"/></li>
+
+      	     <li><input class="options" type="button" value="法国" onclick="chio1(this)" onmouseover="Ohover(this)" onmouseOut="Ole(this)"/></li>
+
+       		 <li><input class="options" type="button" value="德国" onclick="chio1(this)" onmouseover="Ohover(this)" onmouseOut="Ole(this)"/></li>
+    
+    </ul>
+</div>
+
+<!--第二个下拉菜单-->
+<!--<div class="pull-down-menus_box pull-down-menus_box2">
+<input type="text" value="提示内容2" class="boxtext" id="boxtext2"/>
+<span class="downmenus downmenus2" onClick="lidown2(this)">∨</span>
+	
+	<ul class="pull-down-menus pull-down-menus2">
+    	
+        	 <li><input class="options" type="button" value="北京" onclick="chio2(this)" onmouseover="Ohover(this)" onmouseOut="Ole(this)" /></li>
+
+      	     <li><input class="options" type="button" value="上海" onclick="chio2(this)" onmouseover="Ohover(this)" onmouseOut="Ole(this)" /></li>
+
+      	     <li><input class="options" type="button" value="广州" onclick="chio2(this)" onmouseover="Ohover(this)" onmouseOut="Ole(this)" /></li>
+
+      	     <li><input class="options" type="button" value="深圳" onclick="chio2(this)" onmouseover="Ohover(this)" onmouseOut="Ole(this)" /></li>
+
+       		 <li><input class="options" type="button" value="杭州" onclick="chio2(this)" onmouseover="Ohover(this)" onmouseOut="Ole(this)" /></li>
+    
+    </ul>   
+</div>
+-->
+</body>
+</html>
